@@ -2,6 +2,8 @@
 Push-and-Copy is a Python3 GUI application for copying the file contents.
 Selecting the filepath displayed on listbox, the file contents will be copied to clipboard.
 
+**It was made for my personal needs, so the quality is not high.**
+
 It uses the library `tkinter` and `pyperclip`.
 
 I've confirmed that it works with the following versions:
