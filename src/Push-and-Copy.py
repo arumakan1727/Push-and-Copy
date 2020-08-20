@@ -43,6 +43,10 @@ def main(args):
         print(errMessage, file=sys.stderr)
         sys.exit(1)
 
+    filepaths = args
+    basenames = list(map(os.path.basename, filepaths))
+    longestBasename = max(map(len, basenames))
+
     # Root
     root = Tk()
     root.title("Push and Copy")
@@ -55,7 +59,7 @@ def main(args):
     # 使い方のラベル
     usageLabel = ttk.Label(
         frame,
-        text="Selecting the filepath, the file contents will be copied to clipboard.",
+        text="Selecting the filename, the file contents will be copied to clipboard.",
         font=tkFont.Font(family="monospace", size=11),
         background="white",
         padding=(0, 20),
@@ -74,7 +78,7 @@ def main(args):
     # コマンドライン引数のファイルパス群をリスト表示する Listbox
     pathListbox = Listbox(
         frame,
-        listvariable=StringVar(value=args),
+        listvariable=StringVar(value=basenames),
         selectmode="single",
         font=tkFont.Font(family="monospace", size=28),
         cursor="hand1",
@@ -82,7 +86,8 @@ def main(args):
         bg="#fcfcfc",
         fg="#505050",
         activestyle="none",
-        height=len(args),
+        height=len(basenames),
+        width=max(longestBasename + 2, 16),
     )
 
     # pathListbox でアイテム選択イベント発火時に実行する処理
